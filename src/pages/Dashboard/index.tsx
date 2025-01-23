@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import Layout from "./layout";
 import { Plus } from "lucide-react";
 import { CustomCard } from "@/components/CustomCard";
 import { RecentTransaction } from "@/components/RecentTransaction";
@@ -8,7 +7,7 @@ import { SpendingOverView } from "@/components/SpendingOverview";
 export const Dashboard = () => {
   return (
     <div>
-      <Layout>
+   
         <div className="max-w-2xl md:max-w-4xl mx-auto">
           <div className="flex justify-between items-center w-full">
             <div>
@@ -43,7 +42,7 @@ export const Dashboard = () => {
             <SpendingOverView/>
           </div>
         </div>
-      </Layout>
+
     </div>
   );
 };
