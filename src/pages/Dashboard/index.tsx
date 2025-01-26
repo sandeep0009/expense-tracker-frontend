@@ -11,6 +11,7 @@ import { RootState } from "@/store/store";
 
 export const Dashboard = () => {
   const [isExpenseModalOpen, setIsExpenseModalOpen] = useState(false);
+  const[incomeDashboard,setIncomeDashboard]=useState([]);
   const token = useSelector((state: RootState) => state.user.token);
 
   const handleAdd = () => {
@@ -27,11 +28,15 @@ export const Dashboard = () => {
         Authorization: `Bearer ${token}`,
       },
     });
+
+    setIncomeDashboard(res.data.resultArray);
+
+    console.log(res)
   }
 
   useEffect(()=>{
     getDashboardDetailas();
-  })
+  },[])
 
   return (
     <div>
@@ -53,13 +58,13 @@ export const Dashboard = () => {
         </div>
 
         <div className="mt-6">
-          <CustomCard
+          {/* <CustomCard
             title="Total Balance"
-            percentage="+2.5%"
-            balance={12}
+            percentage={incomeDashboard[4]}
+            balance={incomeDashboard[0]}
             date="Updated 1 min ago"
             color="bg-green-100 text-green-600"
-          />
+          /> */}
         </div>
 
         <div>
