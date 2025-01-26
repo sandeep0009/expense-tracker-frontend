@@ -2,7 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { axiosInstance } from "@/lib/axiosInstance";
+import { setUserId } from "@/slice/userSlice";
+import { AppDispatch } from "@/store/store";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 interface FormData {
@@ -17,6 +20,7 @@ export const SignIn = () => {
   });
   const router=useNavigate();
   const {toast}=useToast();
+  const dispatch=useDispatch<AppDispatch>();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -30,8 +34,12 @@ export const SignIn = () => {
     e.preventDefault();
     try {
         const res=await axiosInstance.post('/signin',{formData});
-        if(res.status==201){
+        
+        if(res.status==200){
             router('/');
+            localStorage.setItem('token',res.data.token);
+            dispatch(setUserId({token:res.data.token}));
+            
             toast({
                 title: "Sign-in Successful",
                 description: "You have successfully signed in.",
