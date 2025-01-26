@@ -6,6 +6,7 @@ import Layout from "./layout"
 import { Analytics } from "./pages/Analytics"
 import { SignUp } from "./pages/Signup"
 import { SignIn } from "./pages/SignIn"
+import { Income } from "./pages/Income"
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
       <Route path="/analytics" element={<Analytics/>}/>
       <Route path="/signup" element={<SignUp/>}/>
       <Route path="/signin" element={<SignIn/>}/>
+      <Route path="/income" element={<Income/>}/>
     </Routes>
     </Layout>
      

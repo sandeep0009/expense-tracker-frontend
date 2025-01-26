@@ -14,6 +14,12 @@ import { Link } from "react-router-dom"
 
 const items = [
   {
+    title: "Income",
+    url: "/income",
+    icon: PieChart,
+
+  },
+  {
     title: "Dashboard",
     url: "/",
     icon: PieChart,
@@ -21,6 +27,11 @@ const items = [
   {
     title: "Transactions",
     url: "/transactions",
+    icon: Wallet,
+  },
+  {
+    title: "Budget",
+    url: "/budget",
     icon: Wallet,
   },
   {
