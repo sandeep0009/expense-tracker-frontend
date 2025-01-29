@@ -1,4 +1,4 @@
-import { PieChart, Wallet, BarChart2 } from "lucide-react"
+import { PieChart, Wallet, BarChart2, Wallet2 } from "lucide-react"
 
 import {
   Sidebar,
@@ -16,19 +16,13 @@ const items = [
   {
     title: "Income",
     url: "/income",
-    icon: PieChart,
+    icon: Wallet,
 
   },
   {
     title: "Dashboard",
     url: "/",
     icon: PieChart,
-  },
-
-  {
-    title: "Budget",
-    url: "/budget",
-    icon: Wallet,
   },
   {
     title: "Analytics",
@@ -39,21 +33,21 @@ const items = [
 
 export function AppSidebar() {
   return (
-    <Sidebar>
+    <Sidebar collapsible="icon">
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupLabel className="text-center text-2xl text-black mb-4">
-          PocketPilot
+          Pocket Pilot
           </SidebarGroupLabel>
-          <hr className="w-full mb-8" />
+          <hr className="max-w-full mt-2 " />
           <SidebarGroupContent>
-            <SidebarMenu className="space-y-8">
+            <SidebarMenu className="space-y-6 mt-3">
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <Link to={item.url} className="flex items-center space-x-4">
                       <item.icon className="text-xl" />
-                      <span className="text-xl font-semibold">{item.title}</span>
+                      <span className="font-medium">{item.title}</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

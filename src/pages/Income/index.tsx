@@ -23,6 +23,7 @@ import { Edit, Percent, Plus, Trash } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
+import { CustomPagination } from "@/components/CustomPagination";
 const COLORS = ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF"];
 
 interface IncomeData {
@@ -39,11 +40,12 @@ export const Income = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const token = useSelector((state: RootState) => state.user.token);
+  console.log("reduz token",token); 
 
   const handleClose = () => {
     setIsIncomeModalOpen(false);
   };
-
+  
   const handleAdd = () => {
     setIsIncomeModalOpen(true);
   };
@@ -167,24 +169,9 @@ export const Income = () => {
             {Math.min(currentPage * rowsPerPage, totalItems)} of {totalItems}{" "}
             results
           </div>
-          <div className="flex items-center">
-            <Select
-              value={rowsPerPage.toString()}
-              onValueChange={(value) => {
-                setRowsPerPage(Number(value));
-                setCurrentPage(1);
-              }}
-            >
-              <SelectTrigger className="w-28 border rounded-lg text-sm">
-                <SelectValue placeholder="Rows per page" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="5">5 rows</SelectItem>
-                <SelectItem value="10">10 rows</SelectItem>
-                <SelectItem value="15">15 rows</SelectItem>
-              </SelectContent>
-            </Select>
-            <Pagination
+          <div className="flex items-center">           
+             
+            <CustomPagination
               totalItems={totalItems}
               itemsPerPage={rowsPerPage}
               currentPage={currentPage}
@@ -234,7 +221,7 @@ export const Income = () => {
       </div>
       {isIncomeModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <CreateIncome onClose={handleClose} />
+          <CreateIncome onClose={handleClose} onIncomeCreate={getIncome}/>
         </div>
       )}
     </>

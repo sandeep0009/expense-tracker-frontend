@@ -93,20 +93,20 @@ export const Analytics = () => {
                         <h2 className="text-lg font-semibold">Spending Overview</h2>
                     </CardHeader>
                     <CardContent className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6">
-                        <div className="bg-gray-100 p-4 rounded-lg">
+                        <div className="border p-4 rounded-lg">
                             <h3 className="text-sm text-gray-500">Total Spending</h3>
                             <p className="text-xl font-bold">${analyticsData.totalSpending.toFixed(2)}</p>
                         </div>
-                        <div className="bg-gray-100 p-4 rounded-lg">
+                        <div className=" border p-4 rounded-lg">
                             <h3 className="text-sm text-gray-500">Avg Daily Spending</h3>
                             <p className="text-xl font-bold">${analyticsData.averageDailySpending.toFixed(2)}</p>
                         </div>
-                        <div className="bg-gray-100 p-4 rounded-lg">
+                        <div className=" border p-4 rounded-lg">
                             <h3 className="text-sm text-gray-500">Top Category</h3>
                             <p className="text-xl font-bold">{analyticsData.topCategory.category}</p>
                             <span className="text-sm text-gray-500">{analyticsData.topCategory.percentage.toFixed(1)}%</span>
                         </div>
-                        <div className="bg-gray-100 p-4 rounded-lg">
+                        <div className="border p-4 rounded-lg">
                             <h3 className="text-sm text-gray-500">Total Transactions</h3>
                             <p className="text-xl font-bold">{analyticsData.totalTransactions}</p>
                         </div>

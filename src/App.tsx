@@ -6,20 +6,25 @@ import { Analytics } from "./pages/Analytics"
 import { SignUp } from "./pages/Signup"
 import { SignIn } from "./pages/SignIn"
 import { Income } from "./pages/Income"
+import { PrivateRoute } from "./components/PrivateRoute"
 
 function App() {
 
   return (
     <>
+
     <Layout>
+
     <Routes>
-      <Route path="/" element={<Dashboard/>} />
-      <Route path="/analytics" element={<Analytics/>}/>
       <Route path="/signup" element={<SignUp/>}/>
       <Route path="/signin" element={<SignIn/>}/>
-      <Route path="/income" element={<Income/>}/>
+      <Route path="/" element={<PrivateRoute component={Dashboard} />} />
+          <Route path="/analytics" element={<PrivateRoute component={Analytics} />} />
+          <Route path="/income" element={<PrivateRoute component={Income} />} />
+
     </Routes>
     </Layout>
+
      
     </>
   )

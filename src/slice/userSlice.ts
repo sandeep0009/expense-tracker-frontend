@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface User{
-    token:string |undefined
+    token:string |null
 };
 
 const initialState:User={
-    token:undefined
+    token:window.localStorage.getItem('token')?window.localStorage.getItem('token'):null
 }
 
 const userSlice = createSlice({
@@ -14,12 +14,14 @@ const userSlice = createSlice({
     reducers: {
       setUserId: (state, action: PayloadAction<{token:string}>) => {
         state.token = action.payload.token;
+        window.localStorage.setItem('token',state.token);
       },
-      clearUserId: (state) => {
-        state.token = undefined;
+      clearToken: (state) => {
+        state.token = null;
+        window.localStorage.removeItem('token');
       },
     },
   });
 
-  export const { setUserId, clearUserId } = userSlice.actions;
+  export const { setUserId, clearToken } = userSlice.actions;
   export const userReducer = userSlice.reducer;

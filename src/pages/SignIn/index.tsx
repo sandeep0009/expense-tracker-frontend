@@ -36,10 +36,9 @@ export const SignIn = () => {
         const res=await axiosInstance.post('/signin',{formData});
         
         if(res.status==200){
-            router('/');
             localStorage.setItem('token',res.data.token);
             dispatch(setUserId({token:res.data.token}));
-            
+            router('/');         
             toast({
                 title: "Sign-in Successful",
                 description: "You have successfully signed in.",

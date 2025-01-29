@@ -1,7 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;300;400;500;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @layer base {
+  body {
+    font-family: 'Roboto Mono', monospace;
+    font-size: smaller;
+    font-weight: 200;
+  }
   :root {
     --background: 0 0% 100%;
     --foreground: 0 0% 3.9%;
