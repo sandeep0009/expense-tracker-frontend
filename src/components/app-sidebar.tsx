@@ -24,11 +24,7 @@ const items = [
     url: "/",
     icon: PieChart,
   },
-  {
-    title: "Transactions",
-    url: "/transactions",
-    icon: Wallet,
-  },
+
   {
     title: "Budget",
     url: "/budget",

@@ -81,7 +81,7 @@ export const Dashboard = () => {
       },
     });
     console.log("transaction",res)
-    setTransactions(res.data.data);
+    setTransactions(res.data.result.transactions);
     console.log("trans",transactions)
     setTotalRows(res.data.total);
   };
