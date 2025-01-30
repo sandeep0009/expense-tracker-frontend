@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { axiosInstance } from "@/lib/axiosInstance";
-import { setUserId } from "@/slice/userSlice";
+import { setUserId, setVerifiedOtp } from "@/slice/userSlice";
 import { AppDispatch } from "@/store/store";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -36,9 +36,8 @@ export const SignIn = () => {
         const res=await axiosInstance.post('/signin',{formData});
         
         if(res.status==200){
-            localStorage.setItem('token',res.data.token);
-            dispatch(setUserId({token:res.data.token}));
-            router('/');         
+            dispatch(setVerifiedOtp({verifiedOtp:true}))
+            router('/signin');         
             toast({
                 title: "Sign-in Successful",
                 description: "You have successfully signed in.",

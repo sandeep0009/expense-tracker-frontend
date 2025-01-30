@@ -1,10 +1,5 @@
 import { Menu, ShoppingBag, DollarSign, Coffee, Car, TrendingUp, Layers } from "lucide-react";
 import { Card, CardContent, CardHeader } from "./ui/card";
-import { useEffect, useState } from "react";
-import { axiosInstance } from "@/lib/axiosInstance";
-import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
-import { title } from "process";
 import { formatDate } from "@/lib/formatTime";
 
 const iconConfig: { [key: string]: { Icon: any; bg: string; color: string } } = {
@@ -17,26 +12,11 @@ const iconConfig: { [key: string]: { Icon: any; bg: string; color: string } } = 
   Miscellaneous: { Icon: Layers, bg: "bg-gray-300", color: "text-gray-500" },
 };
 
-export const RecentTransaction = () => {
-  const [recentTransactions, setRecentTransactions] = useState([]);
-  const token = useSelector((state: RootState) => state.user.token);
+interface RecentTransactionProps { 
+  recentTransactions: any[], onExpenseCreate: () => void 
+}
 
-  const getTransactions = async () => {
-    const res = await axiosInstance.get("/recent-transactions", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    console.log("Recet",res)
-
-    setRecentTransactions(res.data.currentTransaction);
-  };
-
-  useEffect(() => {
-    getTransactions();
-  }, []);
-
-  console.log(recentTransactions)
+export const RecentTransaction = ({ recentTransactions, onExpenseCreate }:RecentTransactionProps) => {
   return (
     <div className="mt-8 shadow-sm">
       <Card>

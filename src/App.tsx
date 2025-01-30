@@ -7,6 +7,8 @@ import { SignUp } from "./pages/Signup"
 import { SignIn } from "./pages/SignIn"
 import { Income } from "./pages/Income"
 import { PrivateRoute } from "./components/PrivateRoute"
+import { VerifyOtp } from "./pages/VerifyOtp"
+import { OtpProtectedRoute } from "./lib/otpProtectedRoute"
 
 function App() {
 
@@ -18,6 +20,7 @@ function App() {
     <Routes>
       <Route path="/signup" element={<SignUp/>}/>
       <Route path="/signin" element={<SignIn/>}/>
+      <Route path="/verify-otp" element={<OtpProtectedRoute component={<VerifyOtp/>}/>}/>
       <Route path="/" element={<PrivateRoute component={Dashboard} />} />
           <Route path="/analytics" element={<PrivateRoute component={Analytics} />} />
           <Route path="/income" element={<PrivateRoute component={Income} />} />

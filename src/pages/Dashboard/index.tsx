@@ -14,6 +14,8 @@ export const Dashboard = () => {
   const [isExpenseModalOpen, setIsExpenseModalOpen] = useState(false);
   const [dashboardData, setIncomeDashboard] = useState([]);
   const [transactions, setTransactions] = useState([]);
+  const [recentTransactions, setRecentTransactions] = useState([]);
+
 
   const token = useSelector((state: RootState) => state.user.token);
 
@@ -44,10 +46,19 @@ export const Dashboard = () => {
     setTransactions(res.data.result.transactions);
 
   };
+  const getTransactions = async () => {
+    const res = await axiosInstance.get("/recent-transactions", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    setRecentTransactions(res.data.currentTransaction);
+  };
 
   useEffect(() => {
     getDashboardDetails();
     getFilterTransaction();
+    getTransactions()
   }, []);
 
   return (
@@ -101,7 +112,7 @@ export const Dashboard = () => {
         </div>
 
         <div>
-          <RecentTransaction />
+          <RecentTransaction recentTransactions={recentTransactions} onExpenseCreate={getTransactions} />
         </div>
 
         <div className="mt-8">
@@ -111,7 +122,7 @@ export const Dashboard = () => {
 
       {isExpenseModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <CreateExpense onClose={handleClose} />
+          <CreateExpense onClose={handleClose} onExpenseCreate={getFilterTransaction} />
         </div>
       )}
     </div>

@@ -16,9 +16,10 @@ import { RootState } from "@/store/store"; // Import RootState
 
 interface CreateExpenseProps {
   onClose: () => void;
+  onExpenseCreate:()=>void
 }
 
-export const CreateExpense: FC<CreateExpenseProps> = ({ onClose }) => {
+export const CreateExpense: FC<CreateExpenseProps> = ({ onClose ,onExpenseCreate}) => {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [spentMoney, setSpentMoney] = useState("");
@@ -41,6 +42,7 @@ export const CreateExpense: FC<CreateExpenseProps> = ({ onClose }) => {
           title: "Expense Created Successfully",
         });
         onClose();
+        onExpenseCreate();
       }
     } catch (error) {
       toast({
