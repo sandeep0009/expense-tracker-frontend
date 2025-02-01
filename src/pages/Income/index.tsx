@@ -9,19 +9,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Pagination } from "@/components/ui/pagination";
+
 import { axiosInstance } from "@/lib/axiosInstance";
 import { RootState } from "@/store/store";
-import { Edit, Percent, Plus, Trash } from "lucide-react";
+import { Edit, Plus, Trash } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import { CustomPagination } from "@/components/CustomPagination";
 const COLORS = ["#FF6384", "#36A2EB", "#FFCE56", "#4BC0C0", "#9966FF"];
@@ -36,13 +29,10 @@ export const Income = () => {
   const [isIncomeModalOpen, setIsIncomeModalOpen] = useState<boolean>(false);
   const [incomeData, setIncomeData] = useState<IncomeData[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>("");
-  const [rowsPerPage, setRowsPerPage] = useState<number>(5);
+  const [rowsPerPage] = useState<number>(5);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const token = useSelector((state: RootState) => state.user.token);
-  console.log(token)
-  console.log("reduz token",token); 
-
   const handleClose = () => {
     setIsIncomeModalOpen(false);
   };

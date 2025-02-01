@@ -1,4 +1,4 @@
-import { PieChart, Wallet, BarChart2, Wallet2 } from "lucide-react"
+import { PieChart, Wallet, BarChart2 } from "lucide-react"
 
 import {
   Sidebar,

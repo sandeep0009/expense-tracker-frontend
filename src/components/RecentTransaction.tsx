@@ -17,7 +17,7 @@ interface RecentTransactionProps {
   onExpenseCreate: () => void 
 }
 
-export const RecentTransaction = ({ recentTransactions, onExpenseCreate }:RecentTransactionProps) => {
+export const RecentTransaction = ({ recentTransactions }:RecentTransactionProps) => {
   return (
     <div className="mt-8 shadow-sm">
       <Card>

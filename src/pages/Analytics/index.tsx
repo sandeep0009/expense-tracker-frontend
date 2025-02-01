@@ -172,7 +172,7 @@ export const Analytics = () => {
                                     minAngle={5}
                                     label={showLabels ? customLabel : undefined}
                                 >
-                                    {spendingTrends.map((entry, index) => (
+                                    {spendingTrends.map((index) => (
                                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                     ))}
                                 </Pie>
