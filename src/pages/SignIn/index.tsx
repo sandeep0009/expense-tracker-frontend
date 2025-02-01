@@ -59,6 +59,7 @@ export const SignIn = () => {
 
     try {
       const res = await axiosInstance.post("/signin", formData);
+      console.log(res)
       if (res.status === 200) {
         localStorage.setItem("email", formData.email);
         dispatch(setVerifiedOtp({ verifiedOtp: true }));
