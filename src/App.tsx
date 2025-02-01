@@ -25,7 +25,7 @@ function App() {
       <Route path="/verify-otp" element={<OtpProtectedRoute component={VerifyOtp} />} />      <Route path="/" element={<PrivateRoute component={Dashboard} />} />
           <Route path="/analytics" element={<PrivateRoute component={Analytics} />} />
           <Route path="/income" element={<PrivateRoute component={Income} />} />
-          <Route path="/dasboard" element={<PrivateRoute component={Dashboard}/>}/>
+          <Route path="/dashboard" element={<PrivateRoute component={Dashboard}/>}/>
 
     </Routes>
     </Layout>
