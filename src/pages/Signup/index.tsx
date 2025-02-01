@@ -130,7 +130,7 @@ export const SignUp = () => {
             <p className="text-sm text-black">
               Already have an account?{" "}
               <Link to="/signin" className="text-blue-600 hover:underline">
-                Sign up here
+                Sign in here
               </Link>
             </p>
           </div>
