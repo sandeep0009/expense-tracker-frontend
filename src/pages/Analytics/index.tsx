@@ -204,7 +204,7 @@ export const Analytics = () => {
                                     isAnimationActive={false}
                                     label={showLabels ? customLabel : undefined}
                                 >
-                                    {categories.map((entry, index) => (
+                                    {categories.map(( index) => (
                                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                                     ))}
                                 </Pie>
