@@ -15,7 +15,7 @@ export const HomePage = () => {
     const [isOpen, setIsOpen] = useState(false);
     const router=useNavigate();
     const handleStarted=()=>{
-        router('/signin');
+        router('/signup');
         
     }
     return (
