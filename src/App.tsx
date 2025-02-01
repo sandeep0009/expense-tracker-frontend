@@ -19,7 +19,7 @@ function App() {
     <Layout>
 
     <Routes>
-      <Route path="/home" element={<HomePage/>}/>
+      <Route path="/" element={<HomePage/>}/>
       <Route path="/signup" element={<SignUp/>}/>
       <Route path="/signin" element={<SignIn/>}/>
       <Route path="/verify-otp" element={<OtpProtectedRoute component={VerifyOtp} />} />      <Route path="/" element={<PrivateRoute component={Dashboard} />} />

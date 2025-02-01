@@ -114,7 +114,7 @@ export const Dashboard = () => {
           <CardHeader>
             <h2 className="text-lg font-semibold">Expense Overview</h2>
           </CardHeader>
-          <CardContent className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4 sm:p-6">
+          <CardContent className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 sm:p-6">
             {dashboardData.length > 0 && (
               <>
                 <div className="border p-4 rounded-lg">

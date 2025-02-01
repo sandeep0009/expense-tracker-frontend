@@ -23,7 +23,8 @@ export const RecentTransaction = ({ recentTransactions, onExpenseCreate }:Recent
       <Card>
         <CardHeader className="font-bold text-2xl">Recent Transactions</CardHeader>
         <CardContent>
-          {recentTransactions.map((transaction: any, index: number) => {
+          {recentTransactions.length>0?
+          recentTransactions.map((transaction: any, index: number) => {
             const { category, title, createdAt, spentMoney } = transaction;
             const { Icon, bg, color } = iconConfig[category] || iconConfig["Miscellaneous"];
             return (
@@ -45,7 +46,10 @@ export const RecentTransaction = ({ recentTransactions, onExpenseCreate }:Recent
                 </div>
               </div>
             );
-          })}
+          }) :
+
+          <p>No data found</p>
+          }
         </CardContent>
       </Card>
     </div>

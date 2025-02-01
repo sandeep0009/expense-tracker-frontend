@@ -2,12 +2,14 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface User{
     token:string |null,
-    verifiedOtp:boolean
+    verifiedOtp:boolean,
+    income:number
 };
 
 const initialState:User={
     token:window.localStorage.getItem('token')?window.localStorage.getItem('token'):null,
-    verifiedOtp:false
+    verifiedOtp:false,
+    income:0
 }
 
 const userSlice = createSlice({
@@ -22,6 +24,10 @@ const userSlice = createSlice({
         state.token = action.payload.token;
         window.localStorage.setItem('token',state.token);
       },
+      setIncome:(state,action:PayloadAction<{income:number}>)=>{
+        state.income=action.payload.income
+
+      },
       clearToken: (state) => {
         state.token = null;
         state.verifiedOtp=false;
@@ -30,5 +36,5 @@ const userSlice = createSlice({
     },
   });
 
-  export const { setUserId, clearToken ,setVerifiedOtp} = userSlice.actions;
+  export const { setUserId, clearToken ,setVerifiedOtp,setIncome} = userSlice.actions;
   export const userReducer = userSlice.reducer;
