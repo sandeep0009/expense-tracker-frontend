@@ -40,6 +40,7 @@ export const Income = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
 
   const token = useSelector((state: RootState) => state.user.token);
+  console.log(token)
   console.log("reduz token",token); 
 
   const handleClose = () => {

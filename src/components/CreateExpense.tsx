@@ -41,8 +41,8 @@ export const CreateExpense: FC<CreateExpenseProps> = ({ onClose ,onExpenseCreate
         toast({
           title: "Expense Created Successfully",
         });
+        await onExpenseCreate();
         onClose();
-        onExpenseCreate();
       }
     } catch (error) {
       toast({

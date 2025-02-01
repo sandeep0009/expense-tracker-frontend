@@ -6,7 +6,7 @@ import { DashboardNavbar } from "./components/DashoardNavbar";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const location = useLocation();
-  const authRoutes = ['/signin', '/signup', '/forgot-password', '/reset-password','/verify-otp'];
+  const authRoutes = ['/signin', '/signup', '/forgot-password', '/reset-password','/verify-otp','/home'];
   const isAuthPage = authRoutes.includes(location.pathname);
 
   if (isAuthPage) {

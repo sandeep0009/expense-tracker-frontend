@@ -8,6 +8,7 @@ interface PrivateRouteProps {
 export const PrivateRoute = ({ component: Component }: PrivateRouteProps) => {
   const token = localStorage.getItem("token");
   const router = useNavigate();
+  console.log(token);
 
   useEffect(() => {
     if (!token) {

@@ -3,19 +3,23 @@ import { Button } from "@/components/ui/button";
 import { useState, useRef } from "react";
 import { axiosInstance } from "@/lib/axiosInstance";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUserId } from "@/slice/userSlice";
 
 export const VerifyOtp = () => {
+  console.log("otp")
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
   const router=useNavigate();
   const email=localStorage.getItem('email');
+  const dispatch=useDispatch();
   const handleChange = (index: number, value: string) => {
     if (!/^\d*$/.test(value)) return;
 
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
-    if (value && index < 5) {
+    if (value && index <5) {
       inputRefs.current[index + 1]?.focus();
     }
     if (newOtp.every((digit) => digit !== "")) {
@@ -30,8 +34,10 @@ export const VerifyOtp = () => {
 
   const handleSubmit =async () => {
     const otpValue = otp.join("");
-    const res=await axiosInstance.post('/verify-otp',{email,otp});
+    const res=await axiosInstance.post('/verify-otp',{email,otp:otpValue});
     if(res.status===200){
+      localStorage.setItem('token',res.data.token);
+      dispatch(setUserId({token:res.data.token}));
         router('/income');
 
     }

@@ -16,22 +16,37 @@ export const Analytics = () => {
     });
     const [selectedPeriod, setSelectedPeriod] = useState("30");
     const [viewMode, setViewMode] = useState("daily");
+    const [radius, setRadius] = useState(120);
+    const [showLabels, setShowLabels] = useState(true);
     const token = useSelector((state: RootState) => state.user.token);
     const [categories, setCategories] = useState([]);
 
     const COLORS = ["#8884d8", "#82ca9d", "#ffc658", "#ff8042", "#8dd1e1"];
 
-    const getQueryString = () => {
-        let query = `timeRange=${selectedPeriod}&viewMode=${viewMode}`;
-        return query;
+    const updateChartSize = () => {
+        const width = window.innerWidth;
+        if (width < 480) {
+            setRadius(80);
+            setShowLabels(false);
+        } else if (width < 768) {
+            setRadius(100);
+            setShowLabels(true);
+        } else {
+            setRadius(120);
+            setShowLabels(true);
+        }
     };
+
+    useEffect(() => {
+        updateChartSize();
+        window.addEventListener("resize", updateChartSize);
+        return () => window.removeEventListener("resize", updateChartSize);
+    }, []);
 
     const fetchAnalytics = async () => {
         try {
             const res = await axiosInstance.get(`/analytics?timeRange=${selectedPeriod}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
+                headers: { Authorization: `Bearer ${token}` },
             });
             setAnalyticsData(res.data.result);
         } catch (error) {
@@ -41,11 +56,8 @@ export const Analytics = () => {
 
     const fetchSpendingTrends = async () => {
         try {
-            const query = getQueryString();
-            const res = await axiosInstance.get(`/get-spending-trends?${query}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
+            const res = await axiosInstance.get(`/get-spending-trends?timeRange=${selectedPeriod}&viewMode=${viewMode}`, {
+                headers: { Authorization: `Bearer ${token}` },
             });
             setSpendingTrends(res.data.spendingTrends);
         } catch (error) {
@@ -70,14 +82,28 @@ export const Analytics = () => {
         fetchCategories();
     }, [selectedPeriod, viewMode]);
 
+    //@ts-ignore
+    const customLabel = ({ name, value }) => (
+        <text
+            x={0}
+            y={0}
+            dy={8}
+            textAnchor="middle"
+            fontSize={10}
+            fill="#333"
+        >
+            {`${name}: Rs ${value}`}
+        </text>
+    );
+
     return (
-        <div className="max-w-2xl md:max-w-4xl mx-auto mt-6">
+        <div className="max-w-2xl md:max-w-4xl mx-auto mt-6 px-4 sm:px-6">
             <div className="flex justify-between items-center">
                 <h2 className="text-2xl font-bold">Transaction</h2>
                 <div>
                     <Select onValueChange={(value) => setSelectedPeriod(value)}>
-                        <SelectTrigger id="framework">
-                            <SelectValue placeholder="Select number of days" />
+                        <SelectTrigger id="framework" className="w-40">
+                            <SelectValue placeholder="Select days" />
                         </SelectTrigger>
                         <SelectContent position="popper">
                             <SelectItem value="7">Last 7 days</SelectItem>
@@ -87,21 +113,22 @@ export const Analytics = () => {
                     </Select>
                 </div>
             </div>
+
             <div className="mt-6">
                 <Card>
                     <CardHeader>
                         <h2 className="text-lg font-semibold">Spending Overview</h2>
                     </CardHeader>
-                    <CardContent className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6">
+                    <CardContent className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 p-6">
                         <div className="border p-4 rounded-lg">
                             <h3 className="text-sm text-gray-500">Total Spending</h3>
-                            <p className="text-xl font-bold">${analyticsData.totalSpending.toFixed(2)}</p>
+                            <p className="text-xl font-bold">Rs {analyticsData.totalSpending.toFixed(2)}</p>
                         </div>
-                        <div className=" border p-4 rounded-lg">
+                        <div className="border p-4 rounded-lg">
                             <h3 className="text-sm text-gray-500">Avg Daily Spending</h3>
-                            <p className="text-xl font-bold">${analyticsData.averageDailySpending.toFixed(2)}</p>
+                            <p className="text-xl font-bold">Rs {analyticsData.averageDailySpending.toFixed(2)}</p>
                         </div>
-                        <div className=" border p-4 rounded-lg">
+                        <div className="border p-4 rounded-lg">
                             <h3 className="text-sm text-gray-500">Top Category</h3>
                             <p className="text-xl font-bold">{analyticsData.topCategory.category}</p>
                             <span className="text-sm text-gray-500">{analyticsData.topCategory.percentage.toFixed(1)}%</span>
@@ -114,7 +141,7 @@ export const Analytics = () => {
                 </Card>
             </div>
 
-            <div className="flex justify-between gap-4 mt-6">
+            <div className="flex flex-col md:flex-row gap-4 mt-6">
                 <Card className="flex-1">
                     <CardHeader>
                         <div className="flex justify-between">
@@ -141,9 +168,9 @@ export const Analytics = () => {
                                     nameKey="period"
                                     cx="50%"
                                     cy="50%"
-                                    outerRadius={100}
-                                    fill="#8884d8"
-                                    label={(entry) => `${entry.period}: $${entry.totalAmount}`}
+                                    outerRadius={radius}
+                                    minAngle={5}
+                                    label={showLabels ? customLabel : undefined}
                                 >
                                     {spendingTrends.map((entry, index) => (
                                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -164,15 +191,18 @@ export const Analytics = () => {
                                 <Pie
                                     data={categories.map((category) => ({
                                         name: category,
-                                        value: 1,  // Assume each category has equal distribution, adjust based on actual data
+                                        value: 1,
                                     }))}
                                     dataKey="value"
                                     nameKey="name"
                                     cx="50%"
                                     cy="50%"
-                                    outerRadius={100}
-                                    fill="#82ca9d"
-                                    label={(entry) => `${entry.name}: ${entry.value}`}
+                                    outerRadius={radius}
+                                    minAngle={5}
+                                    
+                                    labelLine={false}
+                                    isAnimationActive={false}
+                                    label={showLabels ? customLabel : undefined}
                                 >
                                     {categories.map((entry, index) => (
                                         <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />

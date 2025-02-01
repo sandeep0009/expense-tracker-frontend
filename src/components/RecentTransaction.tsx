@@ -13,7 +13,8 @@ const iconConfig: { [key: string]: { Icon: any; bg: string; color: string } } = 
 };
 
 interface RecentTransactionProps { 
-  recentTransactions: any[], onExpenseCreate: () => void 
+  recentTransactions: any[], 
+  onExpenseCreate: () => void 
 }
 
 export const RecentTransaction = ({ recentTransactions, onExpenseCreate }:RecentTransactionProps) => {
@@ -40,7 +41,7 @@ export const RecentTransaction = ({ recentTransactions, onExpenseCreate }:Recent
                   </div>
                 </div>
                 <div className={`${spentMoney > 0 ? "text-green-500" : "text-red-500"}`}>
-                  {spentMoney > 0 ? `+$${spentMoney}` : `-$${Math.abs(spentMoney)}`}
+                  {spentMoney > 0 ? `Rs ${spentMoney}` : `Rs ${Math.abs(spentMoney)}`}
                 </div>
               </div>
             );

@@ -9,6 +9,7 @@ import { Income } from "./pages/Income"
 import { PrivateRoute } from "./components/PrivateRoute"
 import { VerifyOtp } from "./pages/VerifyOtp"
 import { OtpProtectedRoute } from "./lib/otpProtectedRoute"
+import { HomePage } from "./pages/HomePage"
 
 function App() {
 
@@ -18,10 +19,10 @@ function App() {
     <Layout>
 
     <Routes>
+      <Route path="/home" element={<HomePage/>}/>
       <Route path="/signup" element={<SignUp/>}/>
       <Route path="/signin" element={<SignIn/>}/>
-      <Route path="/verify-otp" element={<OtpProtectedRoute component={<VerifyOtp/>}/>}/>
-      <Route path="/" element={<PrivateRoute component={Dashboard} />} />
+      <Route path="/verify-otp" element={<OtpProtectedRoute component={VerifyOtp} />} />      <Route path="/" element={<PrivateRoute component={Dashboard} />} />
           <Route path="/analytics" element={<PrivateRoute component={Analytics} />} />
           <Route path="/income" element={<PrivateRoute component={Income} />} />
 

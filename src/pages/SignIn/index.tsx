@@ -33,11 +33,12 @@ export const SignIn = () => {
   const handleSubmit =async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-        const res=await axiosInstance.post('/signin',{formData});
+        const res=await axiosInstance.post('/signin',formData);
         
         if(res.status==200){
+          localStorage.setItem('email',formData.email);
             dispatch(setVerifiedOtp({verifiedOtp:true}))
-            router('/signin');         
+            router('/verify-otp');         
             toast({
                 title: "Sign-in Successful",
                 description: "You have successfully signed in.",
