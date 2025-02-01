@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { axiosInstance } from "@/lib/axiosInstance";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { setUserId } from "@/slice/userSlice";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "@/store/store";
@@ -119,8 +119,6 @@ export const SignUp = () => {
             </button>
             {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
           </div>
-
-          {/* Submit Button */}
           <div>
             <Button type="submit" className="w-full font-bold py-2 px-4 rounded-lg shadow-md transition-all">
               Sign Up
@@ -128,6 +126,14 @@ export const SignUp = () => {
           </div>
         </form>
       </div>
+      <div className="mt-4 text-center">
+            <p className="text-sm text-black">
+              Already have an account?{" "}
+              <Link to="/signin" className="text-blue-600 hover:underline">
+                Sign up here
+              </Link>
+            </p>
+          </div>
     </div>
   );
 };

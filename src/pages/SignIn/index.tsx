@@ -6,12 +6,20 @@ import { setVerifiedOtp } from "@/slice/userSlice";
 import { AppDispatch } from "@/store/store";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { z } from "zod";
 import { Eye, EyeOff } from "lucide-react";
+
 const signInSchema = z.object({
   email: z.string().email("Invalid email format"),
-  password:z.string().min(4).max(8).regex(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{4,8}$/, "Password must contain at least one letter, one number, and one special character"),
+  password: z
+    .string()
+    .min(4)
+    .max(8)
+    .regex(
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{4,8}$/,
+      "Password must contain at least one letter, one number, and one special character"
+    ),
 });
 
 export const SignIn = () => {
@@ -107,10 +115,19 @@ export const SignIn = () => {
             </button>
             {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
           </div>
+
           <div>
             <Button type="submit" className="w-full font-bold py-2 px-4 rounded-lg shadow-md transition-all">
               Sign In
             </Button>
+          </div>
+          <div className="mt-4 text-center">
+            <p className="text-sm text-black">
+              Don't have an account?{" "}
+              <Link to="/signup" className="text-blue-600 hover:underline">
+                Sign up here
+              </Link>
+            </p>
           </div>
         </form>
       </div>
