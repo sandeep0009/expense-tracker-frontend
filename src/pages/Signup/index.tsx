@@ -12,7 +12,7 @@ import { Eye, EyeOff } from "lucide-react";
 const signUpSchema = z.object({
   name: z.string().min(3, "Name must be at least 3 characters long"),
   email: z.string().email("Invalid email format"),
-  password:z.string().min(4).max(8).regex(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{4,8}$/, "Password must contain at least one letter, one number, and one special character"),
+  password:z.string().min(4).max(8),
 });
 
 export const SignUp = () => {

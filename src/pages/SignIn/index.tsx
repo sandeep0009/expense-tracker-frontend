@@ -16,10 +16,7 @@ const signInSchema = z.object({
     .string()
     .min(4)
     .max(8)
-    .regex(
-      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{4,8}$/,
-      "Password must contain at least one letter, one number, and one special character"
-    ),
+   ,
 });
 
 export const SignIn = () => {
